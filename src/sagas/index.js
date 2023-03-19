@@ -1,16 +1,8 @@
-// import { takeEvery } from 'redux-saga/effects';
-// import { IMAGES } from '../constant';
-
-// function* handleLoadImages() {
-//   console.log('Load Images From Unplase');
-// }
-
-// function* rootSaga() {
-//   yield takeEvery(IMAGES.LOAD, handleLoadImages);
-// }
-
-// export default rootSaga;
-
+import { all } from 'redux-saga/effects';
 import imageSaga from './imageSaga';
+import watchStatsSaga from './statsSaga';
 
-export default imageSaga;
+function* rootSaga() {
+  yield all([imageSaga(), watchStatsSaga()]);
+}
+export default rootSaga;

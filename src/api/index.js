@@ -6,6 +6,15 @@ const URL = 'https://api.unsplash.com/photos/';
 
 export const fetchImages = async (page) => {
   const response = await fetch(`${URL}?client_id=${KEY}&per_page=28&page=${page}`);
+
+  const data = await response.json();
+  if (response.status >= 400) {
+    throw new Error(data.errors);
+  }
+  return data;
+};
+export const fetchImagesStats = async (id) => {
+  const response = await fetch(`${URL}${id}/statistics?client_id=${KEY}`);
   console.log('response', response);
   const data = await response.json();
   if (response.status >= 400) {
